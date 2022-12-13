@@ -18,13 +18,18 @@ public class VDN1 {
             // System.out.println("Lowest possible long number: " + Long.MIN_VALUE);
             System.out.println("Sum of the numbers entered: " + Sum(userInputNumbers));
             System.out.println("Total numbers entered: " + NumberOfItems(userInputNumbers));
+            System.out.println("Frequency of occurance of each number in the array");
+            System.out.println("=-------------------------------------------------=");
+            FrequencyOfOccurance(userInputNumbers);
             System.out.println("Average of the numbers entered: " + Average(userInputNumbers));
-            System.out.println("Number of Odd Numbers: " + NumberOfOddNumbers(userInputNumbers));
-            System.out.println("Number of Even Numbers: " + NumberOfEvenNumbers(userInputNumbers));
+            System.out.println("Number of Odd numbers: " + NumberOfOddNumbers(userInputNumbers));
+            System.out.println("Number of Even numbers: " + NumberOfEvenNumbers(userInputNumbers));
+            // TODO: System.out.println("Number of Different numbers: " + );
             System.out.println("Standard deviation of the array is: " + StandardDeviaton(userInputNumbers));
             System.out.println("Median of the array is(If 0 then it doesnt exist): " + Median(userInputNumbers));
             System.out.println("The biggest number is: " + BiggestNumber(userInputNumbers));
             System.out.println("The second biggest number is: " + SecondBiggestNumber(userInputNumbers));
+            // TODO : System.out.println("The second smallest number is: " + SecondBiggestNumber(userInputNumbers));
             System.out.println("The most repeated number is: " + MostRepeatedNumber(userInputNumbers));
             System.out.println("Total number of palindromes entered: " + NumberOfPalindromes(userInputTokenised));
             System.out.println("Second biggest palindrome(If 0 then it doesnt exist): " + SecondBiggestPalindrome(userInputTokenised));
@@ -193,4 +198,30 @@ public class VDN1 {
     return sum;
     }
 
+    public static void FrequencyOfOccurance(long[] numbers){
+        HashMap<Long,Integer> numCounts = new HashMap<>();
+        HashMap<Double,Double> numFreq = new HashMap<>();
+        //we fill the hashmaps with elements from the input array
+        for (int i = 0; i < numbers.length; i++) {
+            numCounts.put(numbers[i], null);
+            numFreq.put((double) numbers[i], null);
+        }
+
+        //check how many times a number is repeated, if key matches element then increase the key's value
+        for (int i = 0; i < numbers.length; i++) {
+            if (numCounts.containsKey(numbers[i])){
+                numCounts.put(numbers[i], numCounts.get(numbers[i] + 1));
+            }
+        }
+        //calculate the freq %
+        numFreq.forEach(
+            (key, value)
+                -> numFreq.put(numFreq.get(key),  (((double) numCounts.get(key) /  (double) numbers.length) * 100)));
+    
+        //print map
+        numFreq.forEach(
+            (key, value)
+                -> System.out.println(key + " = " + value));
+    
+    }
 }

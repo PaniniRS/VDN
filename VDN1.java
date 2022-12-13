@@ -20,6 +20,7 @@ public class VDN1 {
             System.out.println("Total numbers entered: " + NumberOfItems(userInputNumbers));
             System.out.println("Frequency of occurance of each number in the array");
             System.out.println("=-------------------------------------------------=");
+            //TODO: fix error for function below
             FrequencyOfOccurance(userInputNumbers);
             System.out.println("Average of the numbers entered: " + Average(userInputNumbers));
             System.out.println("Number of Odd numbers: " + NumberOfOddNumbers(userInputNumbers));

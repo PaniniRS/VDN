@@ -9,7 +9,6 @@ import java.util.Set;
 public class VDN1 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        //Get the numbers from the user, split the input and then convert them to Longs.
         System.out.print("Enter your numbers seperated by one blank space: ");
         try {
             String userInput = sc.nextLine();

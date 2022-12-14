@@ -83,6 +83,17 @@ public class VDN1 {
         return counter;
     }
 
+    public static int NumberOfDifferentNumber(long[] numbers){
+        int count = 0;
+        Arrays.sort(numbers);
+        for (int i = 0; i < numbers.length; i++) {
+            if(numbers[i] != numbers[i+1]){
+                count++;
+            }
+        }
+        return count;
+    }
+
     public static long BiggestNumber(long[] numbers){
         long biggestNumber = Long.MIN_VALUE;
         for (int j = 0; j < numbers.length; j++) {

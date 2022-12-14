@@ -30,7 +30,7 @@ public class VDN1 {
             System.out.println("Median of the array is(If 0 then it doesnt exist): " + Median(userInputNumbers));
             System.out.println("The biggest number is: " + BiggestNumber(userInputNumbers));
             System.out.println("The second biggest number is: " + SecondBiggestNumber(userInputNumbers));
-            // TODO : System.out.println("The second smallest number is: " + SecondBiggestNumber(userInputNumbers));
+            TODO : System.out.println("The second smallest number is: " + SecondSmallestNumber(userInputNumbers));
             System.out.println("The most repeated number is: " + MostRepeatedNumber(userInputNumbers));
             System.out.println("Total number of palindromes entered: " + NumberOfPalindromes(userInputTokenised));
             System.out.println("Second biggest palindrome(If 0 then it doesnt exist): " + SecondBiggestPalindrome(userInputTokenised));
@@ -107,6 +107,20 @@ public class VDN1 {
         }
         return secondBiggestNumber;
         }
+
+    public static long SecondSmallestNumber(long[] numbers){
+        Arrays.sort(numbers);
+        long smallestNumber = numbers[0];
+        long secondSmallestNumber = numbers[0];
+        for (int i = 0; i < numbers.length; i++) {
+            if (numbers[i] != numbers[i+1]){
+                if (smallestNumber > numbers[i]){
+                    secondSmallestNumber = numbers[i];
+                }
+            }
+        }
+        return secondSmallestNumber;
+    }
 
     public static double StandardDeviaton(long[] numbers){
         double sum = Sum(numbers);
@@ -225,4 +239,6 @@ public class VDN1 {
                 -> System.out.println(key + " = " + value));
     
     }
+
+    
 }

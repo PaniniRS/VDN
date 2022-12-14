@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
@@ -18,19 +19,19 @@ public class VDN1 {
             // System.out.println("Lowest possible long number: " + Long.MIN_VALUE);
             System.out.println("Sum of the numbers entered: " + Sum(userInputNumbers));
             System.out.println("Total numbers entered: " + NumberOfItems(userInputNumbers));
-            System.out.println("Frequency of occurance of each number in the array");
+            // System.out.println("Frequency of occurance of each number in the array");
             System.out.println("=-------------------------------------------------=");
             //TODO: fix error for function below
-            FrequencyOfOccurance(userInputNumbers);
+            // FrequencyOfOccurance(userInputNumbers);
             System.out.println("Average of the numbers entered: " + Average(userInputNumbers));
             System.out.println("Number of Odd numbers: " + NumberOfOddNumbers(userInputNumbers));
             System.out.println("Number of Even numbers: " + NumberOfEvenNumbers(userInputNumbers));
-            // TODO: System.out.println("Number of Different numbers: " + );
+            System.out.println("Number of Different numbers: " + NumberOfDifferentNumber(userInputNumbers));
             System.out.println("Standard deviation of the array is: " + StandardDeviaton(userInputNumbers));
             System.out.println("Median of the array is(If 0 then it doesnt exist): " + Median(userInputNumbers));
             System.out.println("The biggest number is: " + BiggestNumber(userInputNumbers));
             System.out.println("The second biggest number is: " + SecondBiggestNumber(userInputNumbers));
-            TODO : System.out.println("The second smallest number is: " + SecondSmallestNumber(userInputNumbers));
+            System.out.println("The second smallest number is: " + SecondSmallestNumber(userInputNumbers));
             System.out.println("The most repeated number is: " + MostRepeatedNumber(userInputNumbers));
             System.out.println("Total number of palindromes entered: " + NumberOfPalindromes(userInputTokenised));
             System.out.println("Second biggest palindrome(If 0 then it doesnt exist): " + SecondBiggestPalindrome(userInputTokenised));
@@ -85,12 +86,11 @@ public class VDN1 {
 
     public static int NumberOfDifferentNumber(long[] numbers){
         int count = 0;
-        Arrays.sort(numbers);
+        HashSet<Long> numbersSet = new HashSet<>();
         for (int i = 0; i < numbers.length; i++) {
-            if(numbers[i] != numbers[i+1]){
-                count++;
-            }
+            numbersSet.add(numbers[i]);
         }
+        count = numbersSet.size();
         return count;
     }
 
@@ -120,18 +120,19 @@ public class VDN1 {
         }
 
     public static long SecondSmallestNumber(long[] numbers){
-        Arrays.sort(numbers);
         long smallestNumber = numbers[0];
-        long secondSmallestNumber = numbers[0];
+        long secondSmallestNumber = numbers[1];
+    
         for (int i = 0; i < numbers.length; i++) {
-            if (numbers[i] != numbers[i+1]){
-                if (smallestNumber > numbers[i]){
-                    secondSmallestNumber = numbers[i];
-                }
+            if (numbers[i] < smallestNumber) {
+                secondSmallestNumber = smallestNumber;
+                smallestNumber = numbers[i];
+            } else if (numbers[i] < secondSmallestNumber){
+                secondSmallestNumber = numbers[i];
             }
         }
         return secondSmallestNumber;
-    }
+        }
 
     public static double StandardDeviaton(long[] numbers){
         double sum = Sum(numbers);

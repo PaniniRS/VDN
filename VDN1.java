@@ -16,13 +16,10 @@ public class VDN1 {
             String[] userInputTokenised = userInput.split(" ");
             long[] userInputNumbers = Shortcuts.StringArrayToLongArray(userInputTokenised);
             long[] userInputNumbersFlipped = Shortcuts.FlipLongArray(userInputNumbers);
-            // System.out.println("Lowest possible long number: " + Long.MIN_VALUE);
             System.out.println("Sum of the numbers entered: " + Sum(userInputNumbers));
             System.out.println("Total numbers entered: " + NumberOfItems(userInputNumbers));
-            // System.out.println("Frequency of occurance of each number in the array");
-            System.out.println("=-------------------------------------------------=");
-            //TODO: fix error for function below
-            // FrequencyOfOccurance(userInputNumbers);
+            System.out.println("Frequency of occurance of each number in the array:");
+                FrequencyOfOccurance(userInputNumbers);
             System.out.println("Average of the numbers entered: " + Average(userInputNumbers));
             System.out.println("Number of Odd numbers: " + NumberOfOddNumbers(userInputNumbers));
             System.out.println("Number of Even numbers: " + NumberOfEvenNumbers(userInputNumbers));
@@ -37,7 +34,6 @@ public class VDN1 {
             System.out.println("Second biggest palindrome(If 0 then it doesnt exist): " + SecondBiggestPalindrome(userInputTokenised));
             System.out.print("Reverse order of the array: "); Shortcuts.PrintLongArrayInOneLine(userInputNumbersFlipped);
             sc.close();
-            // Shortcuts.PrintLongArray(userInputNumbersFlipped, "FlippedArray");
         } catch (Exception e) {
             System.out.println("Error!");
             System.out.println(e);
@@ -226,30 +222,22 @@ public class VDN1 {
     }
 
     public static void FrequencyOfOccurance(long[] numbers){
-        HashMap<Long,Integer> numCounts = new HashMap<>();
-        HashMap<Double,Double> numFreq = new HashMap<>();
-        //we fill the hashmaps with elements from the input array
-        for (int i = 0; i < numbers.length; i++) {
-            numCounts.put(numbers[i], null);
-            numFreq.put((double) numbers[i], null);
-        }
+        HashMap<Long, Integer> numCounts = new HashMap<>();
 
-        //check how many times a number is repeated, if key matches element then increase the key's value
-        for (int i = 0; i < numbers.length; i++) {
-            if (numCounts.containsKey(numbers[i])){
-                numCounts.put(numbers[i], numCounts.get(numbers[i] + 1));
+        for (long element : numbers) {
+            if (numCounts.containsKey(element)) {
+                int count = numCounts.get(element);
+                numCounts.put(element, count + 1);
+            } else {
+                numCounts.put(element, 1);
             }
         }
-        //calculate the freq %
-        numFreq.forEach(
-            (key, value)
-                -> numFreq.put(numFreq.get(key),  (((double) numCounts.get(key) /  (double) numbers.length) * 100)));
-    
-        //print map
-        numFreq.forEach(
-            (key, value)
-                -> System.out.println(key + " = " + value));
-    
+        int totalElements = numbers.length;
+        for (long element : numCounts.keySet()) {
+            double frequency = (double) numCounts.get(element) / totalElements * 100;
+            System.out.println("    " + element + " occurs " + frequency + "% of the time.");
+        }
+
     }
 
     
